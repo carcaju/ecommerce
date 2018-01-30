@@ -2,19 +2,16 @@
 
 require_once("vendor/autoload.php");
 
-use \Slim\Slim;
-use \carcaju\Page;
-
-$app = new Slim();
+$app = new \Slim\Slim();
 
 $app->config('debug', true);
 
 $app->get('/', function() {
     
-    $page = new Page();
+	$page = new Hcode\Page();
 
-    $page->setTpl("index");
-	
+	$page->setTpl("index");
+
 });
 
 $app->run();
