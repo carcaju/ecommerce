@@ -4,10 +4,20 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdd2db1cebdb58fc3a32f10fea6fe18de
+class ComposerStaticInit485511f3eeb43002858ea7ffb352ae38
 {
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/carcaju/php-classes/src',
+    public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'carcaju\\' => 8,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'carcaju\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/carcaju/php-classes/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -41,9 +51,10 @@ class ComposerStaticInitdd2db1cebdb58fc3a32f10fea6fe18de
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->fallbackDirsPsr4 = ComposerStaticInitdd2db1cebdb58fc3a32f10fea6fe18de::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitdd2db1cebdb58fc3a32f10fea6fe18de::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitdd2db1cebdb58fc3a32f10fea6fe18de::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit485511f3eeb43002858ea7ffb352ae38::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit485511f3eeb43002858ea7ffb352ae38::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit485511f3eeb43002858ea7ffb352ae38::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit485511f3eeb43002858ea7ffb352ae38::$classMap;
 
         }, null, ClassLoader::class);
     }

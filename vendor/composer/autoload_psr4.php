@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '' => array($vendorDir . '/carcaju/php-classes/src'),
+    'carcaju\\' => array($vendorDir . '/carcaju/php-classes/src'),
 );

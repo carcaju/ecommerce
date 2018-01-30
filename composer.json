@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "": "vendor\\carcaju\\php-classes\\src"
+            "carcaju\\": "vendor\\carcaju\\php-classes\\src"
         }
     }
 }
