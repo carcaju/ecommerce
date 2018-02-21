@@ -12,6 +12,7 @@ class User extends Model {
 	const SECRET = "carcaju_criptogr";
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
+	const SUCCESS = "UserSucess";
 
 	public static function getFromSession() {
 
@@ -141,7 +142,7 @@ class User extends Model {
 				":iduser"=>$this->getiduser(),
 				":desperson"=>$this->getdesperson(),
 				":deslogin"=>$this->getdeslogin(),
-				":despassword"=>User::getPasswordHash($this->getdespassword()),
+				":despassword"=>$this->getdespassword(),
 				":desemail"=>$this->getdesemail(),
 				":nrphone"=>$this->getnrphone(),
 				":inadmin"=>$this->getinadmin()
@@ -159,7 +160,7 @@ class User extends Model {
 		));
 	}
 
-	public static function getForgot($email) {
+	public static function getForgot($email, $inadmin=true) {
 		$sql = new Sql();
 
 		$results = $sql->select("SELECT * FROM tb_persons a
@@ -185,7 +186,12 @@ class User extends Model {
 
 				$code = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
 
-				$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
+				if($inadmin === true) {
+					$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
+				} else {
+					$link = "http://www.hcodecommerce.com.br/forgot/reset?code=$code";
+
+				}
 
 				$mailer = new Mailer($data["desemail"],$data["desperson"],"Redefinir senha da Hcodestore","forgot", array(
 						"name"=>$data["desperson"],
@@ -310,6 +316,31 @@ class User extends Model {
  		return password_hash($password, PASSWORD_DEFAULT, ['cost'=>12]);
 
  	}
+
+ 	public static function setSuccess($msg) {
+
+ 		$_SESSION[User::SUCCESS] = $msg;
+
+ 	}
+
+ 	public static function getSuccess() {
+
+ 		$msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : "";
+
+ 		User::clearSuccess();
+
+ 		return $msg;
+
+ 	}
+
+ 	public static function clearSuccess() {
+
+ 		$_SESSION[User::SUCCESS] = NULL;
+
+ 	}
+
+
+
 
 
 }
