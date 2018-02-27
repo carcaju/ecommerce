@@ -1,6 +1,7 @@
 <?php
 
 use \carcaju\Model\User;
+use \carcaju\Model\Cart;
 
 function formatPrice(float $vlprice) {
 
@@ -23,5 +24,25 @@ function getUserName() {
 	return $user->getdesperson();
 
 }
+
+function getCartNrQtd() {
+
+	$cart = Cart::getFromSession();
+
+	$totals = $cart->getProductsTotals();
+
+	return $totals['nrqtd'];
+}
+
+
+function getCartVlSubTotal() {
+
+	$cart = Cart::getFromSession();
+
+	$totals = $cart->getProductsTotals();
+
+	return $totals['vlprice'];
+}
+
 
 ?>
